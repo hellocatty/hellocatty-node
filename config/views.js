@@ -10,6 +10,7 @@
  * For more information on views and layouts, check out:
  * http://sailsjs.org/#!/documentation/concepts/Views
  */
+var extras = require('swig-extras');
 
 module.exports.views = {
 
@@ -29,9 +30,51 @@ module.exports.views = {
   * https://github.com/balderdashy/sails-wiki/blob/0.9/config.views.md#engine *
   *                                                                           *
   ****************************************************************************/
+  engine: {
+    // 模板引擎修改为swig
+    ext: 'swig',
 
-  engine: 'ejs',
+    fn: function(path, data, cb) {
+      /* Swig Renderer */
+      var swig = require('swig');
 
+      // 保证我们在开发环境下每次更改swig不用重启sails
+      if (data.settings.env === 'development') {
+        swig.setDefaults({
+          cache: false
+        });
+      }
+      /*
+       * 绑定一些常用路径
+       * Thanks to: https://github.com/mahdaen/sails-views-swig
+       * */
+      var paths = {
+        script: '/js',
+        style: '/styles/default',
+        image: '/images',
+        font: '/fonts',
+        icon: '/icons',
+        bower: '/bower_components'
+      };
+
+      if (!data.path) {
+        data.path = paths;
+      } else {
+        for (var key in paths) {
+          /*jshint ignore: start*/
+          if (!key in data.path) {
+            data.path[key] = paths[key];
+          }
+          /*jshint ignore: end*/
+        }
+      }
+      // 补充extra
+      extras.useFilter(swig, 'split');
+      /* Render Templates */
+      return swig.renderFile(path, data, cb);
+    }
+  }, 
+  
 
   /****************************************************************************
   *                                                                           *
