@@ -3,17 +3,17 @@
   "version": "1.11.3",
   "main": "dist/jquery.js",
   "license": "MIT",
-  // "ignore": [
-  //   "**/.*",
-  //   "build",
-  //   "dist/cdn",
-  //   "speed",
-  //   "test",
-  //   "*.md",
-  //   "AUTHORS.txt",
-  //   "Gruntfile.js",
-  //   "package.json"
-  // ],
+  "ignore": [
+    "**/.*",
+    "build",
+    "dist/cdn",
+    "speed",
+    "test",
+    "*.md",
+    "AUTHORS.txt",
+    "Gruntfile.js",
+    "package.json"
+  ],
   "devDependencies": {
     "sizzle": "2.1.1-jquery.2.1.2",
     "requirejs": "2.1.10",
