@@ -44,6 +44,12 @@ module.exports.views = {
           cache: false
         });
       }
+      // 维护一个site变量
+      data.site = sails.config.site;
+      // 提供一个变量标示用户是否登录
+      if (typeof (data.isLogged) == 'undefined') {
+        data.isLogged = !!data.req.isAuthenticated();
+      }
       /*
        * 绑定一些常用路径
        * Thanks to: https://github.com/mahdaen/sails-views-swig
@@ -65,7 +71,7 @@ module.exports.views = {
           if (!key in data.path) {
             data.path[key] = paths[key];
           }
-          /*jshint ignore: end*/
+        /*jshint ignore: end*/
         }
       }
       // 补充extra
@@ -73,8 +79,8 @@ module.exports.views = {
       /* Render Templates */
       return swig.renderFile(path, data, cb);
     }
-  }, 
-  
+  },
+
 
   /****************************************************************************
   *                                                                           *
