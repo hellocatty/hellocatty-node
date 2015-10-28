@@ -11,5 +11,6 @@
         {%- endblock %}
     </div>
     {# 引入常用脚本 #}
+    {% include "scripts.swig" %}
 </body>
 </html>
