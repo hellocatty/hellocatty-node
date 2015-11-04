@@ -1,4 +1,6 @@
-{% extends '../part/layout.swig' %}
-{% block stylesheets -%}
-<link rel="stylesheet" type="text/css" href="{{ path.style }}/passport.css"/>
-{%- endblock %}
+{% extends '../global/layout.swig' %}
+
+{% block content -%}
+{% block form_content -%}
+{-% endblock%}
+{-% endblock %}

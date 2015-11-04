@@ -2,9 +2,15 @@
 require.config({
   baseUrl: '/bower_components/',
   paths: {
-  	jquery: 'jquery/dist/jquery.min',
-  	requirejs: 'requirejs/require',
-  	react: 'react/react.min'
+    jquery: 'jquery/dist/jquery',
+    requirejs: 'requirejs/require',
+    react: 'react/react'
+  },
+  packages: [
+
+  ],
+  shim: {
+
   }
 });
 

@@ -1,7 +1,7 @@
-define(['./PassportPanel.js'],function(PassportPanel){
+define([],function(){
     return {
         run : function(){
-            var regPanel = new PassportPanel('reg');
+          console.log('register');
         }
     }
 });

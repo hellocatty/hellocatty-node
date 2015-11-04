@@ -48,7 +48,9 @@ module.exports.routes = {
 
   //---------------Login & Register
     // 跳转到注册页面
-    'get /register': 'AuthController.toRegister',
+    'get /register': {
+      view: 'passport/register'
+    },
 
     // 处理注册逻辑
     'post /register': 'AuthController.processRegister',
