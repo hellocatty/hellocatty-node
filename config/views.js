@@ -55,12 +55,10 @@ module.exports.views = {
        * Thanks to: https://github.com/mahdaen/sails-views-swig
        * */
       var paths = {
-        script: '/js',
-        style: '/styles/default',
-        image: '/images',
-        font: '/fonts',
-        icon: '/icons',
-        bower: '/bower_components'
+        script: '/main/js',
+        style: '/main/styles/css',
+        image: '/main/images',
+        libs: '/main/libs'
       };
 
       if (!data.path) {

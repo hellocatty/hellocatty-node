@@ -10,7 +10,15 @@ module.exports = {
      */
     processRegister: function(req,res){
         // 由请求参数构造待创建User对象
-        var user = req.allParams();
+        // var user = req.allParams();
+        if(req.param['password'] !== req.param['password_valid']){
+          return res.view('passport/register',{err:'两次输入密码不相同'});
+        }else{
+          var user = {
+            nickname: req.param['nickname'],
+            password: req.param['password']
+          }
+        }
         User.create(user).exec(function createCB(err, created){
             if(err){
                // 如果有误，返回错误

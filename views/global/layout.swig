@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>{% block title -%}{%- endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% include "styles.swig" -%}
     {% block stylesheets -%}{%- endblock %}
 </head>
 <body>
@@ -11,6 +13,6 @@
         {%- endblock %}
     </div>
     {# 引入常用脚本 #}
-    {% include "scripts.swig" %}
+    {% include "scripts.swig" -%}
 </body>
 </html>

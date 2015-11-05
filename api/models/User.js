@@ -12,7 +12,7 @@ module.exports = {
   attributes: {
 
     // 站点名称
-    nickName: {
+    nickname: {
       type: 'string',
       required: true,
       minLength: 1,
@@ -20,23 +20,9 @@ module.exports = {
     },
 
     // 邮箱
-    email: {
-      type: 'email',
-      unique: true,
-      required: true
-    },
-
-    // 密码
     password: {
       type: 'string',
       required: true
-    },
-
-    // 站点简介
-    siteDesc: {
-      type: 'string',
-      defaultsTo: '嗨猫',
-      maxLength: 40
     },
 
     // 是否管理员（默认为非管理员）
