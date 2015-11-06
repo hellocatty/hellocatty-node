@@ -25,13 +25,13 @@ module.exports.policies = {
   * access)                                                                  *
   *                                                                          *
   ***************************************************************************/
-  '*': true,
-  // '*': 'isAuthenticated',
-  //
-  // AuthController: {
-  //   '*': true,
-  //   toRegister: 'userNotCreated'
-  // }
+  // '*': true,
+  '*': 'isAuthenticated',
+
+  'Auth/AuthController': {
+    '*': true
+    // toRegister: ''
+  }
 
   /***************************************************************************
   *                                                                          *

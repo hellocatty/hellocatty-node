@@ -1,6 +1,6 @@
 // 第三方模块声明
 require.config({
-  baseUrl: '/main/libs/',
+  baseUrl: '/global/libs/',
   paths: {
     jquery: 'jquery/jquery.min',
     requirejs: 'requirejs/require'
@@ -14,6 +14,6 @@ require.config({
 });
 
 // 加载app，并运行
-require(['/main/js/common/app.js'],function(app){
+require(['/global/js/common/app.js'],function(app){
     app.init();
 });

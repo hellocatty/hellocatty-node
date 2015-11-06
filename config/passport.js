@@ -1,5 +1,6 @@
 var passport = require('passport'),
-LocalStragegy = require('passport-local').Strategy;
+LocalStragegy = require('passport-local').Strategy,
+bcrypt = require('bcryptjs');
 
 passport.serializeUser(function(user,done){
   done(null,user.id);
@@ -12,11 +13,11 @@ passport.deserializeUser(function(id,done){
 });
 
 passport.use(new LocalStragegy({
-  usernameField: 'email',
-  passportField: 'password'
+  usernameField: 'nickname',
+  passwordField: 'password'
 },
-function(email,passport,done){
-  User.findOne({email: email},function(err,user){
+function(nickname,password,done){
+  User.findOne({nickname: nickname},function(err,user){
     if(err){
       return done(err);
     }
@@ -31,13 +32,14 @@ function(email,passport,done){
       }
 
       var returnUser = {
-        email: user.email,
+        nickname: user.nickname,
         createdAt: user.createdAt,
         id: user.id
       };
 
       return done(null,returnUser, {
-        message: 'Logged In Successfully'
+        code: 100,
+        msg: 'Logged In Successfully'
       });
     });
   });

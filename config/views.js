@@ -52,13 +52,12 @@ module.exports.views = {
       }
       /*
        * 绑定一些常用路径
-       * Thanks to: https://github.com/mahdaen/sails-views-swig
        * */
       var paths = {
-        script: '/main/js',
-        style: '/main/styles/css',
-        image: '/main/images',
-        libs: '/main/libs'
+        script: '/global/js',
+        style: '/global/styles',
+        image: '/global/images',
+        libs: '/global/libs'
       };
 
       if (!data.path) {

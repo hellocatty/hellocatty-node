@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title -%}{%- endblock %}</title>
+    <title>{% block title -%} {{sails.config.site.name }}-{{sails.config.site.desc}} {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     {% include "styles.swig" -%}
     {% block stylesheets -%}{%- endblock %}

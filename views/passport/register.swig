@@ -1,8 +1,11 @@
-{% extends 'layout.swig' -%}
+{% extends 'layout.swig' %}
 {% set module='passport/register' %}
-{% block title -%}注册{%- endblock %}
+{% block title -%}注册{% endblock %}
 {% block form_content -%}
   <div class='container'>
+    {% if err -%}
+      <div>{{ err.msg}}</div>
+    {% endif %}
     <form action="/register" method="post" >
         <div class="form-group">
           <label for="regInputNickname">用户名</label>

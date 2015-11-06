@@ -14,11 +14,15 @@ module.exports = function(grunt) {
 
 	grunt.config.set('less', {
 		dev: {
+			options:{
+				compress: true
+			},
 			files: [{
 				expand: true,
-				cwd: 'assets/styles/',
-				src: ['importer.less'],
-				dest: '.tmp/public/styles/',
+				// compress: true,
+				cwd: 'assets/global/styles/',
+				src: ['main.less'],
+				dest: '.tmp/public/global/styles/',
 				ext: '.css'
 			}]
 		}

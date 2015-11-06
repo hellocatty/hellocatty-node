@@ -1,8 +1,7 @@
 /**
 * User.js
 *
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
+* @description :: 用户model
 */
 
 var bcrypt = require('bcryptjs');
@@ -25,6 +24,12 @@ module.exports = {
       required: true
     },
 
+    // 是否已认证
+    isCertificated: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    
     // 是否管理员（默认为非管理员）
     isAdmin: {
       type: 'boolean',
@@ -42,5 +47,9 @@ module.exports = {
         cb();
       });
     });
+  },
+
+  afterCreate: function(user,cb) {
+    cb();
   }
 };

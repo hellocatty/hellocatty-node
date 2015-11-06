@@ -2,26 +2,17 @@
 {% set module = 'passport/login' %}
 {% block title -%}欢迎登录{%- endblock %}
 {% block form_content -%}
-    <form class="ui form" action="/login" method="post">
-        <h1 class="ui dividing header">欢迎登录</h1>
-        {% if err -%}
-            <div class="ui error message" style="display: block">
-                <div class="header">登录失败</div>
-                <p>账号或密码错误</p>
-            </div>
-        {%- endif %}
-        <div class="field">
-            <input id="email" name="email" type="text" placeholder="您的邮箱">
+  <div class='container'>
+    <form action="/login" method="post" >
+        <div class="form-group">
+          <label for="regInputNickname">用户名</label>
+          <input type="text" name='nickname' class="form-control" id="regInputNickname" placeholder="用户名">
         </div>
-        <div class="field">
-            <input id="password" name="password" type="password" placeholder="您的密码"/>
+        <div class="form-group">
+          <label for="regInputPwd">密码</label>
+          <input type="password" name='password' class="form-control" id="regInputPwd" placeholder="密码">
         </div>
-        <div class="field">
-            <div class="ui buttons">
-                <button class="ui positive button" type="submit">登录</button>
-                <div class="or"></div>
-                <a class="ui negative button" href="/register">注册</a>
-            </div>
-        </div>
+        <button type="submit" class="btn btn-default">提交</button>
     </form>
+  </div>
 {%- endblock %}

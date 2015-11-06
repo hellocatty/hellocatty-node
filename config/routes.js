@@ -36,6 +36,10 @@ module.exports.routes = {
     view: 'index'
   },
 
+  '/about': {
+    view: 'about'
+  },
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -53,7 +57,7 @@ module.exports.routes = {
     },
 
     // 处理注册逻辑
-    'post /register': 'AuthController.processRegister',
+    'post /register': 'Auth/AuthController.processRegister',
 
     // 跳转到登陆页
     'get /login': {
@@ -61,8 +65,11 @@ module.exports.routes = {
     },
 
     // 处理登陆逻辑
-    'post /login': 'AuthController.processLogin',
+    'post /login': 'Auth/AuthController.processLogin',
 
     // 登出逻辑
-    '/logout': 'AuthController.logout'
+    '/logout': 'Auth/AuthController.logout',
+
+    // 浏览所有文章
+    '/article': 'Article/ArticleController.showAll'
 };
