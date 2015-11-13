@@ -2,18 +2,22 @@
 require.config({
   baseUrl: '/global/libs/',
   paths: {
-    jquery: 'jquery/jquery.min',
-    requirejs: 'requirejs/require'
+    'jquery': 'jquery/jquery',
+    'requirejs': 'requirejs/require',
+    'jqSlidejs': 'jquery-slide/jqSlide.min'
   },
   packages: [
 
   ],
   shim: {
-
+    'jqSlide': {
+      deps: ['jquery'],
+      exports: 'jqSlide'
+    }
   }
 });
 
 // 加载app，并运行
-require(['/global/js/common/app.js'],function(app){
-    app.init();
+require(['jquery', '/global/js/common/app.js'], function($, app) {
+  app.init();
 });

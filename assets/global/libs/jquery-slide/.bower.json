@@ -1,0 +1,31 @@
+{
+  "name": "jquery-slide",
+  "authors": [
+    "zhoujunpeng <zjp0432@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://github.com/hellocatty/jqSlide",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.10.1"
+  },
+  "_release": "7ecd41f1e3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "7ecd41f1e3d27922cb8cf37a2e4f5f23eb5059f6"
+  },
+  "_source": "git@github.com:hellocatty/jqSlide.git",
+  "_target": "*",
+  "_originalSource": "git@github.com:hellocatty/jqSlide.git",
+  "_direct": true
+}

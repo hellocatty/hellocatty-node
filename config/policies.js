@@ -28,10 +28,14 @@ module.exports.policies = {
   // '*': true,
   '*': 'isAuthenticated',
 
+  'Home/HomeController': {
+    '*': true
+  },
   'Auth/AuthController': {
     '*': true
     // toRegister: ''
   }
+
 
   /***************************************************************************
   *                                                                          *

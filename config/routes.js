@@ -32,37 +32,25 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'index'
-  },
-
+  // 首页
+  '/': 'Home/HomeController.render',
+  // about页
   '/about': {
     view: 'about'
   },
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
-
-  //---------------Login & Register
+    //---------------Login & Register
     // 跳转到注册页面
-    'get /register': {
-      view: 'passport/register'
-    },
+    'get /register': 'Auth/AuthController.toRegister',
 
     // 处理注册逻辑
     'post /register': 'Auth/AuthController.processRegister',
 
     // 跳转到登陆页
-    'get /login': {
-        view: 'passport/login'
-    },
+    'get /login': 'Auth/AuthController.toLogin',
+    // 'get /login': {
+    //     view: 'passport/login'
+    // },
 
     // 处理登陆逻辑
     'post /login': 'Auth/AuthController.processLogin',

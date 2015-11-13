@@ -11,33 +11,35 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	create: function(req,res){
+	create: function(req, res) {
 		var _cat = req.allParams();
-		if(!_cat.name){
+		if (!_cat.name) {
 			return res.send({
-				err:{
+				err: {
 					code: 001,
 					msg: '缺少名称'
 				}
 			});
 		}
-		Cat.findOne({name: _cat.name},function(err,cat){
-			if(err){
+		Cat.findOne({
+			name: _cat.name
+		}, function(err, cat) {
+			if (err) {
 				return res.send({
 					code: 002,
 					msg: '数据库错误'
 				});
 			}
 
-			if(cat){
+			if (cat) {
 				return res.send({
 					code: 003,
 					msg: '同名猫咪已被注册'
 				});
 			}
 
-			Cat.create(_cat).exec(function(err, created){
-				if(err){
+			Cat.create(_cat).exec(function(err, created) {
+				if (err) {
 					return res.send({
 						code: 002,
 						msg: '数据库错误'
@@ -55,23 +57,45 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	delete: function(req,res){
+	delete: function(req, res) {
 
 	},
 	/**
-	 * 根据条件搜索猫咪
+	 * 根据请求搜索猫咪
 	 * @param req
 	 * @param res
 	 */
-	search: function(req,res){
+	searchByReq: function(req, res) {
 
+	},
+	/**
+	 * 根据提供的opt搜索猫咪
+	 * @param opt
+	 */
+	searchByOpt: function(opt) {
+		// var _num = opt.unique || 'all';
+		var _opt = opt && opt.info;
+		var _result = null;
+		if (!_opt) {
+			return null;
+		}
+		if (_num !== 'all') {
+			// Cat.findOne({})
+		} else {
+			Cat.find(_opt).exec(function(err, cats) {
+				if (err) {
+					return;
+				}
+				_result = cats;
+			});
+		}
 	},
 	/**
 	 * 更新猫咪身份信息
 	 * @param req
 	 * @param res
 	 */
-	updateIdentifyInfo: function(req,res){
+	updateIdentifyInfo: function(req, res) {
 
 	},
 	/**
@@ -79,7 +103,7 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	updateAdoptInfo: function(req,res){
+	updateAdoptInfo: function(req, res) {
 
 	}
 

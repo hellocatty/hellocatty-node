@@ -1,10 +1,39 @@
 .border-radius(@radius){
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
+  -o-border-radius: @radius;
   border-radius: @radius;
 }
 .box-shadow(@style){
   -webkit-box-shadow: @style;
   -moz-box-shadow: @style;
+  -o-box-shadow: @style;
   box-shadow: @style;
+}
+.positionFix(){
+  position: fixed;
+  _position: absolute;
+  top:0;
+  left: 0;
+}
+.stricktHeight(@size){
+  height: @size;
+  line-height: @size;
+}
+.ulWithoutStyle(){
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.opacity(@size){
+  /* IE 8 */
+  // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+"@size*100)";
+  /* IE 5-7 */
+  // filter: alpha(opacity=(@size*100));
+  /* Netscape */
+  -moz-opacity: @size;
+  /* Safari 1.x */
+  -khtml-opacity: @size;
+  /* Good browsers */
+  opacity: @size;
 }

@@ -1,0 +1,21 @@
+{
+  "name": "jquery-slide",
+  "authors": [
+    "zhoujunpeng <zjp0432@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.10.1"
+  }
+}

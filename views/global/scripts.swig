@@ -6,4 +6,4 @@ var app = {};
 {%- endif  %}
 </script>
 
-<script data-main="{{ path.script }}/common/main" src="{{ path.libs }}/requirejs/require.js"></script>
+<script data-main="/global/js/common/main" src="/global/libs/requirejs/require.js"></script>

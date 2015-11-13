@@ -1,3 +1,84 @@
 @import (less) "./libs/normalize.css";
-@import "icons.less";
-@import "mixins.less";
+@import "exports.less";
+
+body{
+  background-color: @mainGrey;
+  color: @fontColor;
+}
+.hc_main{
+    position: relative;
+    width: 970px;
+    margin: 0 auto;
+}
+.hc_box{
+  margin-top: 60px;
+  .hc_box_head{
+    position: relative;
+    margin-bottom: 10px;
+    .hc_box_head_title{
+      .stricktHeight(24px);
+      padding-left: 20px;
+      position: relative;
+      font-size: 18px;
+    }
+    .title_label{
+      height: 100%;
+      width: 7px;
+      position: absolute;
+      background-color: @mainBlue;
+      top: 0;
+      left: 0;
+    }
+    .title_txt{
+
+    }
+    .hc_box_head_expand{
+      position: absolute;
+      top: 0;
+      right: 0;
+      .stricktHeight(24px);
+      .expand_link{
+        color: @mainBlue;
+      }
+    }
+  }
+  .hc_box_body{
+    position: relative;
+  }
+}
+a{
+  color: @linkNoraml;
+  text-decoration: none;
+  &:hover{
+    // color: @mainOrange !important;
+    text-decoration: none;
+  }
+  &:visited{
+    color: @linkNoraml;
+    text-decoration: none;
+  }
+}
+.hc_btn{
+    border: inherit;
+    padding: inherit;
+    background-color: inherit;
+    outline: none;
+    .box-shadow(none);
+    &:focus{
+      outline: none;
+      .box-shadow(none);
+    }
+}
+.hc_input{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    border: solid 1px @mainBlue;
+    .box-shadow(none);
+    outline: none;
+    &:focus{
+      outline: none;
+      border-color: darken(@mainBlue, 20%);
+    }
+}

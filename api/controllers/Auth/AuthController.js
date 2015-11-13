@@ -1,13 +1,20 @@
 /**
 * 验证逻辑控制器
 * */
-var passport = require('passport');
+var passport = require('passport'),
+swig = require('swig');
 module.exports = {
-    /**
-     * 处理注册逻辑
-     * @param req
-     * @param res
-     */
+    // 跳转登陆页
+    toLogin: function(req, res){
+      var view = swig.renderFile('./views/passport/login.swig');
+      res.send(view);
+    },
+    // 跳转注册页
+    toRegister: function(req, res){
+      var view = swig.renderFile('./views/passport/register.swig');
+      res.send(view);
+    },
+    // 处理注册逻辑
     processRegister: function(req,res){
         // 由请求参数构造待创建User对象
         if(req.param('password') !== req.param('password_valid')){
@@ -66,11 +73,7 @@ module.exports = {
           });
         });
     },
-    /**
-     * 处理登陆逻辑
-     * @param req
-     * @param res
-     */
+    // 处理登陆逻辑
     processLogin: function(req,res){
         // 使用本地验证策略对登录进行验证
         passport.authenticate('local', function(err, user, info) {
@@ -93,11 +96,7 @@ module.exports = {
 
         })(req, res);
     },
-    /**
-     * 处理登出逻辑
-     * @param req
-     * @param res
-     */
+    // 处理登出逻辑
     logout: function(req, res) {
         req.logout();
         res.redirect('/');

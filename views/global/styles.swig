@@ -1,2 +1,2 @@
-<link rel='stylesheet' type="text/css" href="{{ path.style }}/main.css">
-<link rel='stylesheet' type="text/css" href="{{ path.style }}/libs/bootstrap.min.css">
+<link rel='stylesheet' type="text/css" href="/global/styles/main.css">
+{# <link rel='stylesheet' type="text/css" href="/global/styles/libs/bootstrap.min.css"> #}
