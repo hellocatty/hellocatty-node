@@ -23,14 +23,14 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
   // 首页
   '/': 'Home/HomeController.render',
@@ -39,25 +39,29 @@ module.exports.routes = {
     view: 'about'
   },
 
-    //---------------Login & Register
-    // 跳转到注册页面
-    'get /register': 'Auth/AuthController.toRegister',
+  /*---------------Login & Register---------------*/
+  // 跳转到注册页面
+  'get /register': 'Auth/AuthController.toRegister',
 
-    // 处理注册逻辑
-    'post /register': 'Auth/AuthController.processRegister',
+  // 处理注册逻辑
+  'post /register': 'Auth/AuthController.processRegister',
 
-    // 跳转到登陆页
-    'get /login': 'Auth/AuthController.toLogin',
-    // 'get /login': {
-    //     view: 'passport/login'
-    // },
+  // 跳转到登陆页
+  'get /login': 'Auth/AuthController.toLogin',
 
-    // 处理登陆逻辑
-    'post /login': 'Auth/AuthController.processLogin',
+  // 处理登陆逻辑
+  'post /login': 'Auth/AuthController.processLogin',
 
-    // 登出逻辑
-    '/logout': 'Auth/AuthController.logout',
+  // 登出逻辑
+  '/logout': 'Auth/AuthController.logout',
+  /*---------------Login & Register---------------*/
 
-    // 浏览所有文章
-    '/article': 'Article/ArticleController.showAll'
+  /*---------------Users---------------*/
+  // 获取有领养需求的用户列表
+  'get /getPeople': 'User/UserController.searchByReq',
+  /*---------------Users---------------*/
+
+  /*---------------Cats---------------*/
+  'get /getCats': 'Cat/CatController.searchByReq',
+  /*---------------Cats---------------*/
 };

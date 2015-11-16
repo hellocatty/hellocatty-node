@@ -10,6 +10,12 @@
   -o-box-shadow: @style;
   box-shadow: @style;
 }
+.transform(@style){
+  -webkit-transform: @style;
+  -moz-transform: @style;
+  -o-transform: @style;
+  transform: @style;
+}
 .positionFix(){
   position: fixed;
   _position: absolute;
@@ -24,6 +30,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+.fontHel(){
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 .opacity(@size){
   /* IE 8 */

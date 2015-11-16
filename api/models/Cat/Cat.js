@@ -57,10 +57,5 @@ module.exports = {
       type: 'string',
       required: false
     }
-  },
-
-  // 查询是否已被领养
-  isAdopted: function() {
-    return this.adopted;
   }
 };

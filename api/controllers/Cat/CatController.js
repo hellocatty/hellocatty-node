@@ -69,26 +69,28 @@ module.exports = {
 
 	},
 	/**
-	 * 根据提供的opt搜索猫咪
+	 * 根据提供的opt搜索猫咪，供服务端调用
 	 * @param opt
 	 */
 	searchByOpt: function(opt) {
-		// var _num = opt.unique || 'all';
+		// 默认搜索10个结果
+		var _num = opt.num || 10;
 		var _opt = opt && opt.info;
 		var _result = null;
 		if (!_opt) {
 			return null;
 		}
-		if (_num !== 'all') {
-			// Cat.findOne({})
-		} else {
-			Cat.find(_opt).exec(function(err, cats) {
-				if (err) {
-					return;
-				}
-				_result = cats;
-			});
-		}
+
+		Cat.find({
+			where: _opt,
+			limit: _num
+		}).exec(function(err, cats) {
+			if (err) {
+				return;
+			}
+			_result = cats;
+		});
+		return _result;
 	},
 	/**
 	 * 更新猫咪身份信息
