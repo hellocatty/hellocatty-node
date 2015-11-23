@@ -4,8 +4,8 @@
 body{
   background-color: @mainGrey;
   color: @fontColor;
-  margin-bottom: 80px;
-  .fontHel();
+  min-width: @narrowBody;
+  .fontYahei();
 }
 .bak_lightblue{
   background-color: @lightblue;
@@ -21,7 +21,7 @@ body{
 }
 .hc_main{
     position: relative;
-    width: 970px;
+    width: @narrowBody;
     margin: 0 auto;
 }
 .clearfloat{
@@ -80,10 +80,18 @@ a{
     padding: inherit;
     background-color: inherit;
     outline: none;
+    box-sizing: border-box;
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
     .box-shadow(none);
     &:focus{
       outline: none;
       .box-shadow(none);
+    }
+    &_orange{
+      background-color: @orange;
+      color: @fontColor;
     }
 }
 .hc_input{
@@ -92,10 +100,22 @@ a{
     box-sizing: border-box;
     font-size: 12px;
     border: solid 1px @mainBlue;
+    padding-left: 10px;
     .box-shadow(none);
     outline: none;
     &:focus{
       outline: none;
       border-color: darken(@mainBlue, 20%);
+    }
+    &_grey{
+      background-color: @mainGrey;
+      border-color: @fontColor;
+      &:focus,&-focus{
+        border-color: @fontColor;
+        background-color: #ffffff;
+      }
+    }
+    &_borderdash{
+      border-style: dashed;
     }
 }

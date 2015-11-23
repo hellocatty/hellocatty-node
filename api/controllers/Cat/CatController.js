@@ -16,7 +16,7 @@ module.exports = {
 		if (!_cat.name) {
 			return res.send({
 				err: {
-					code: 001,
+					code: '001',
 					msg: '缺少名称'
 				}
 			});
@@ -26,14 +26,14 @@ module.exports = {
 		}, function(err, cat) {
 			if (err) {
 				return res.send({
-					code: 002,
+					code: '002',
 					msg: '数据库错误'
 				});
 			}
 
 			if (cat) {
 				return res.send({
-					code: 003,
+					code: '003',
 					msg: '同名猫咪已被注册'
 				});
 			}
@@ -41,12 +41,12 @@ module.exports = {
 			Cat.create(_cat).exec(function(err, created) {
 				if (err) {
 					return res.send({
-						code: 002,
+						code: '002',
 						msg: '数据库错误'
 					});
 				}
 				return res.send({
-					code: 100,
+					code: '100',
 					msg: '创建成功'
 				});
 			});

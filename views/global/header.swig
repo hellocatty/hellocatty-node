@@ -48,10 +48,10 @@
         {% else %}
           <ul class="auth_list">
             <li class="auth_item">
-              <a href='/login'>登录</a>
+              <a href='/auth#login'>登录</a>
             </li>
             <li class="auth_item">
-              <a href='/register'>注册</a>
+              <a href='/auth#signup'>注册</a>
             </li>
           </ul>
         {% endif %}

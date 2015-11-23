@@ -39,22 +39,18 @@ module.exports.routes = {
     view: 'about'
   },
 
-  /*---------------Login & Register---------------*/
-  // 跳转到注册页面
-  'get /register': 'Auth/AuthController.toRegister',
+  /*---------------Login & Signup---------------*/
+  '/auth': 'Auth/AuthController.toAuth',
 
   // 处理注册逻辑
-  'post /register': 'Auth/AuthController.processRegister',
-
-  // 跳转到登陆页
-  'get /login': 'Auth/AuthController.toLogin',
+  'post /signup': 'Auth/AuthController.processRegister',
 
   // 处理登陆逻辑
   'post /login': 'Auth/AuthController.processLogin',
 
   // 登出逻辑
   '/logout': 'Auth/AuthController.logout',
-  /*---------------Login & Register---------------*/
+  /*---------------Login & Signup---------------*/
 
   /*---------------Users---------------*/
   // 获取有领养需求的用户列表

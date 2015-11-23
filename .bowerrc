@@ -1,6 +1,6 @@
 {
   "directory": "assets/global/libs",
   "scripts": {
-    "postinstall": "bower-requirejs -c assets/global/js/common/main.js -b assets/global/libs/"
+    "postinstall": "bower-requirejs -c assets/global/js/main.js -b assets/global/libs/"
   }
 }
