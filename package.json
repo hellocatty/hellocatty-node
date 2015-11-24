@@ -69,7 +69,9 @@
   "author": "anonymous node/sails user",
   "license": "",
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-umd": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
-    "grunt-babel": "^6.0.0"
+    "grunt-babel": "^6.0.0",
+    "nodemailer-smtp-transport": "^1.0.4"
   }
 }

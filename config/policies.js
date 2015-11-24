@@ -33,7 +33,6 @@ module.exports.policies = {
   },
   'Auth/AuthController': {
     '*': true
-      // toRegister: ''
   }
 
 

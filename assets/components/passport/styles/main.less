@@ -101,7 +101,6 @@ body{
     }
     .form_item{
       width: 320px;
-      height: 30px;
       margin: 0 auto;
       &_input{
         margin-bottom: 10px;
@@ -109,6 +108,16 @@ body{
       &_submit{
         margin-top: 40px;
       }
+    }
+    .form_input{
+      height: 30px;
+    }
+    .form_error{
+      font-size: 14px;
+      .stricktHeight(14px);
+      margin: 5px 0;
+      color: @errorRed;
+      display: none;
     }
     .form_btn_submit{
       width: 100%;

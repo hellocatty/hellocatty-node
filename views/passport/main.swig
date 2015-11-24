@@ -31,32 +31,38 @@
       </ul>
       {# form #}
       <div class="box_form_container box_form_container_signup">
+        <iframe src="" width="" height="" style="display:none;" name='target_ifr'></iframe>
         {# login form #}
-        <form action="/login" method="post" class="login_form">
+        <form action="/login" method="post" class="login_form" target='target_ifr'>
             <div class="form_item form_item_input">
-              <input type="text" name='authname' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="用户名或邮箱">
+              <input type="text" name='signname' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="用户名或邮箱">
               <span class="form_input_placeholder"></span>
+              <div class="form_error"></div>
             </div>
             <div class="form_item form_item_input">
               <input type="password" name='password' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="密码">
               <span class="form_input_placeholder"></span>
+              <div class="form_error"></div>
             </div>
             <div class="form_item form_item_submit">
               <button type="submit" class="hc_btn hc_btn_orange form_btn_submit">登录嗨猫</button>
             </div>
         </form>
         {# signup form #}
-        <form action="/signup" method="post" class="signup_form">
+        <form action="/signup" method="post" class="signup_form" target="target_ifr">
             <div class="form_item form_item_input">
-              <input type="text" name='authorname' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="用户名">
+              <input type="text" name='authname' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="用户名">
+              <div class="form_error"></div>
               <span class="form_input_placeholder"></span>
             </div>
             <div class="form_item form_item_input">
               <input type="email" name='email' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="邮箱">
+              <div class="form_error"></div>
               <span class="form_input_placeholder"></span>
             </div>
             <div class="form_item form_item_input">
               <input type="password" name='password' class="form_input hc_input hc_input_grey hc_input_borderdash" placeholder="密码（不少于6位）">
+              <div class="form_error"></div>
               <span class="form_input_placeholder"></span>
             </div>
             <div class="form_item form_item_submit">

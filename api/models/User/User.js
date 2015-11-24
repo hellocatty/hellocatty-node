@@ -13,13 +13,15 @@ module.exports = {
     authname: {
       type: 'string',
       required: true,
+      unique: true,
       minLength: 1,
-      maxLength: 10
+      maxLength: 15
     },
     // 昵称
     nickname: {
       type: 'string',
       required: true,
+      unique: true,
       minLength: 1,
       maxLength: 10
     },
@@ -27,7 +29,7 @@ module.exports = {
     avator: {
       type: 'string',
       defaultsTo: '',
-      required: true
+      required: false
     },
     // 密码
     password: {
@@ -36,8 +38,7 @@ module.exports = {
     },
     // 邮箱
     email: {
-      type: 'string',
-      email: true,
+      type: 'email',
       required: true
     },
     regDate: {
@@ -55,15 +56,15 @@ module.exports = {
       required: false
     },
     // 激活码有效期
-    token_email_exp:{
+    token_email_exp: {
       type: "number",
       required: false
     },
     // 激活状态:0-未激活；1-已激活
     status: {
-      type: 'number',
-      required: true,
-      defaultsTo: 0
+      type: 'string',
+      defaultsTo: '0',
+      required: true
     },
     // 是否已认证
     isCertificated: {
@@ -106,19 +107,22 @@ module.exports = {
   },
   // 创建用户后，生成邮箱激活码
   afterCreate: function(user, cb) {
-    bcrypt.genSalt(10,function(err,salt){
-      if(err){
+    bcrypt.genSalt(10, function(err, salt) {
+      if (err) {
+        cb();
         return;
       }
-      bcrypt.hash(user.authname+user.password+user.regDate.toISOString(),salt,function(err,hash){
-        if(err){
-          return cb(err);
-        }
-        user.token_email = hash;
-        sails.controllers['auth/auth'].sendValidEmail(user.authname,user.email,user.token_email);
-        cb();
-      });
+      bcrypt.hash(user.authname + user.password + user.regDate.toISOString(),
+        salt,
+        function(err, hash) {
+          if (err) {
+            return cb(err);
+          }
+          user.token_email = hash;
+          sails.controllers['auth/auth'].sendValidEmail(user.authname,
+            user.email, user.token_email);
+          cb();
+        });
     });
-    cb();
   }
 };

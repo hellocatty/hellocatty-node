@@ -50,8 +50,12 @@ module.exports.routes = {
 
   // 登出逻辑
   '/logout': 'Auth/AuthController.logout',
+
   /*---------------Login & Signup---------------*/
 
+  /*---------------用户中心---------------*/
+  'get /u/verify': '',
+  /*---------------用户中心---------------*/
   /*---------------Users---------------*/
   // 获取有领养需求的用户列表
   'get /getPeople': 'User/UserController.searchByReq',

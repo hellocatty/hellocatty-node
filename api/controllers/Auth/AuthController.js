@@ -5,13 +5,17 @@
 var passport = require('passport'),
   swig = require('swig');
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-  service: '163',
+var smtpTransport = require('nodemailer-smtp-transport');
+
+var transporter = nodemailer.createTransport(smtpTransport({
+  host: 'smtp.163.com',
+  secure: true,
   auth: {
     user: 'ihellocatty@163.com',
-    pass: 'b06060321'
+    pass: 'kcizecvxoydlslkd'
   }
-});
+}));
+var rescode = sails.config.rescode;
 module.exports = {
   /** @lends AuthContoller */
   /**
@@ -25,20 +29,20 @@ module.exports = {
   processRegister: function(req, res) {
     // 由请求参数构造待创建User对象
     if (!req.param('authname')) {
-      res.send({
-        err: '001',
+      res.json({
+        err: rescode.invalidAuthname,
         msg: "invalid authname"
       });
     }
     if (!req.param('email')) {
-      res.send({
-        err: '002',
+      res.json({
+        err: rescode.invalidEmail,
         msg: "invalid email address"
       });
     }
     if (!req.param('password')) {
-      res.send({
-        err: '003',
+      res.json({
+        err: rescode.invalidPwd,
         msg: "invalid password"
       });
     }
@@ -46,6 +50,7 @@ module.exports = {
     var _user = {
       authname: req.param('authname'),
       nickname: req.param('authname'),
+      email: req.param('email'),
       password: req.param('password'),
       regDate: _date
     };
@@ -53,34 +58,38 @@ module.exports = {
       authname: _user.authname
     }, function(err, user) {
       if (err) {
-        return res.view('passport/register', {
-          code: '006',
-          msg: '数据库错误'
+        return res.json({
+          code: rescode.dberror,
+          msg: '数据库错误1'
         });
       }
       if (user) {
-        return res.view('passport/register', {
-          code: '007',
+        return res.json({
+          code: rescode.comflictAuthname,
           msg: '用户名已存在'
         });
       }
       User.create(_user).exec(function(err, created) {
         if (err) {
+          console.error(err);
           // 如果有误，返回错误
-          res.view('passport/register', {
-            code: '006',
-            msg: '数据库错误'
+          res.json({
+            code: rescode.dberror,
+            msg: '数据库错误2'
           });
         } else {
           // 否则，将新创建的用户登录
           req.login(created, function(err) {
             if (err) {
-              return res.view('passport/register', {
-                code: '006',
-                msg: '数据库错误'
+              return res.json({
+                code: rescode.dberror,
+                msg: '数据库错误3'
               });
             }
-            return res.redirect('/');
+            return res.json({
+              code: rescode.ok,
+              msg: '注册成功'
+            });
           });
         }
       });
@@ -90,19 +99,31 @@ module.exports = {
   processLogin: function(req, res) {
     // 使用本地验证策略对登录进行验证
     passport.authenticate('local', function(err, user, info) {
-      if ((err) || (!user)) {
-        return res.send({
-          message: info.message,
-          user: user
+      if (err) {
+        return res.json({
+          code: rescode.error,
+          msg: '操作失败，请重试'
+        });
+      }
+      if (!user) {
+        return res.json({
+          code: rescode.notfound,
+          msg: '用户不存在'
         });
       }
       req.logIn(user, function(err) {
-        if (err) res.send(err);
-        if (info.code === 100) {
+        if (err) {
+          res.json({
+            code: rescode.error,
+            msg: '操作失败，请重试'
+          });
+        }
+        if (info.code === '100') {
           return res.redirect('/');
         } else {
-          res.send({
-            msg: info.msg
+          res.json({
+            code: rescode.error,
+            msg: '操作失败，请重试'
           });
         }
       });
@@ -116,18 +137,19 @@ module.exports = {
   },
   // 发送账号激活邮件
   sendValidEmail: function(authname, mailto, token) {
+    console.log('sendValidEmail');
     var mailOptions = {
-      from: 'HelloCatty<hellocatty@hellocatty.com>',
+      from: 'ihellocatty@163.com',
       to: mailto,
       subject: '请激活您的账号',
-      text: '点击以下链接激活您的账号',
-      html: '<div><a href=\'http://www.hellocatty.com/u?user=' + authname +
-        '&verify=' + token + '\' title=\'激活账号\'></a></div>'
+      html: '<div><a href=\'http://www.hellocatty.com/u/verify?user=' +
+        authname + '&verify=' + token +
+        '\' title=\'激活账号\'>点击链接激活您的账号</a></div>'
     };
 
     transporter.sendMail(mailOptions, function(err, info) {
       if (err) {
-        return console.log('send mail error:' + err);
+        return console.log(err);
       }
       console.log('send mail success:' + info.response);
     });

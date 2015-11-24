@@ -1,3 +1,6 @@
+/**
+ * @desc 站点信息
+ */
 module.exports.site = {
   // 站点名称
   name: "嗨猫",

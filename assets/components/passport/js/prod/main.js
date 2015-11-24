@@ -4,7 +4,7 @@
  * @module Passport
  * @desc 通行证模块，包括登录、注册逻辑控制和部分总体样式控制
  */
-define(['jquery', 'backbone', 'jqValidate'], function ($, Backbone) {
+define(['backbone', 'jqValidate'], function (Backbone) {
   return {
     /**
      * @lends Passport
@@ -115,6 +115,20 @@ define(['jquery', 'backbone', 'jqValidate'], function ($, Backbone) {
       }
 
       function initValidate() {
+        // 修改错误提示文案
+        $.extend($.validator.messages, {
+          required: "不能为空",
+          email: "邮箱格式不正确",
+          minlength: $.validator.format('不能少于{0}个字符串'),
+          maxlength: $.validator.format('不能超过{0}个字符串')
+        });
+        // 添加用户名+邮箱的双重验证规则
+        $.validator.addMethod('signname', function (value, element) {
+          var reg_isemail = /[@]/,
+              reg_email = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
+          return !reg_isemail.test(value) || reg_isemail.test(value) && reg_email.test(value);
+        }, '请输入正确的用户名或邮箱');
+        // 注册表单添加验证规则
         $('.signup_form').validate({
           rules: {
             authname: {
@@ -129,18 +143,70 @@ define(['jquery', 'backbone', 'jqValidate'], function ($, Backbone) {
               required: true,
               minlength: 6
             }
+          },
+          errorPlacement: function errorPlacement(error, element) {
+            var container = element.parent().find('.form_error');
+            error.appendTo(container);
+            container.show();
+          },
+          submitHandler: function submitHandler(form) {
+            var $form = $(form);
+            var _action = $form.attr('action');
+            $form.attr('action', '');
+            $.ajax({
+              type: 'post',
+              url: _action,
+              data: $form.serialize(),
+              dataType: 'json'
+            }).done(function (res) {
+              console.log('done');
+              if (res.code !== '100') {
+                alert(res.message);
+              }
+            }).fail(function (res) {
+              console.log('fail');
+            }).always(function () {
+              $form.attr('action', _action);
+            });
           }
         });
+        // 登录表单添加验证规则
         $('.login_form').validate({
           rules: {
-            authname: {
+            signname: {
               required: true,
-              maxlength: 15
+              signname: true
             },
             password: {
-              required: true,
-              minlength: 6
+              required: true
             }
+          },
+          errorPlacement: function errorPlacement(error, element) {
+            var container = element.parent().find('.form_error');
+            error.appendTo(container);
+            container.show();
+          },
+          submitHandler: function submitHandler(form) {
+            var $form = $(form);
+            var _action = $form.attr('action');
+            $form.attr('action', '');
+            $.ajax({
+              type: 'post',
+              url: _action,
+              data: $form.serialize(),
+              dataType: 'json'
+            }).done(function (res) {
+              console.log('done');
+              if (res.code !== '100') {
+                alert(res.message);
+              } else {
+                alert('注册成功');
+              }
+            }).fail(function (res) {
+              console.log('fail');
+            }).always(function () {
+              $form.attr('action', _action);
+            });
           }
         });
       }
