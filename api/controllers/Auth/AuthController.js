@@ -20,12 +20,18 @@ module.exports = {
   /** @lends AuthContoller */
   /**
    * @desc 登录、注册的统一入口，由前端Backbone的hash路由判断展示表单
+   * @param req
+   * @param res
    */
   toAuth: function(req, res) {
     var view = swig.renderFile('./views/passport/main.swig');
     res.send(view);
   },
-  // 处理注册逻辑
+  /**
+   * @desc 处理注册逻辑
+   * @param req
+   * @param res
+   */
   processRegister: function(req, res) {
     // 由请求参数构造待创建User对象
     if (!req.param('authname')) {
@@ -95,7 +101,11 @@ module.exports = {
       });
     });
   },
-  // 处理登陆逻辑
+  /**
+   * @desc 处理登录逻辑
+   * @param req
+   * @param res
+   */
   processLogin: function(req, res) {
     // 使用本地验证策略对登录进行验证
     passport.authenticate('local', function(err, user, info) {
@@ -130,14 +140,23 @@ module.exports = {
 
     })(req, res);
   },
-  // 处理登出逻辑
+  /**
+   * @desc 处理登出逻辑
+   * @param req
+   * @param res
+   */
   logout: function(req, res) {
     req.logout();
     res.redirect('/');
   },
-  // 发送账号激活邮件
+  /**
+   * @desc 发送账号激活邮件
+   * @param authname - 用户名
+   * @param mailto - 用户邮箱地址
+   * @param token - 激活token
+   */
   sendValidEmail: function(authname, mailto, token) {
-    console.log('sendValidEmail');
+    console.log('send email to' + mailto);
     var mailOptions = {
       from: 'ihellocatty@163.com',
       to: mailto,
@@ -146,12 +165,45 @@ module.exports = {
         authname + '&verify=' + token +
         '\' title=\'激活账号\'>点击链接激活您的账号</a></div>'
     };
-
     transporter.sendMail(mailOptions, function(err, info) {
       if (err) {
         return console.log(err);
       }
       console.log('send mail success:' + info.response);
     });
+  },
+  /**
+   * @desc 接受邮箱验证链接
+   * @param req
+   * @param res
+   */
+  verifyEmail: function(req, res) {
+    var _authname = req.param('authname'),
+      _token = req.param('verify');
+    if (!_authname || !_token) {
+      return res.notFound();
+    }
+    User.findOne({
+      authname: _authname
+    }).exec(function(err, user) {
+      if (err) {
+        return res.serverError(err);
+      }
+      if (!user) {
+        return res.notFound();
+      }
+      // 如果用户已验证，跳转首页
+      if (user.status === '1') {
+        return res.redirect('/');
+      }
+      var _date = new Date();
+      if (_date - user.verifyDate > user.token_email_exp) {
+        return res.send('验证邮件已失效，请重新发送');
+      }
+      if (user.token_email === _token) {
+        user.status = '1';
+        return res.send('验证成功');
+      }
+    })
   }
 };

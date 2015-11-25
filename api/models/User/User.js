@@ -42,7 +42,7 @@ module.exports = {
       required: true
     },
     regDate: {
-      type: 'datetime',
+      type: 'date',
       required: true
     },
     // 是否有领养需求
@@ -50,15 +50,20 @@ module.exports = {
       type: 'boolean',
       defaultsTo: true
     },
+    // 发送邮箱的时间，用于验证有效期
+    verifyDate: {
+      type: 'date',
+      required: false
+    },
     // 邮箱激活码
     token_email: {
       type: 'string',
       required: false
     },
-    // 激活码有效期
+    // 激活码有效期，默认24小时
     token_email_exp: {
       type: "number",
-      required: false
+      defaultsTo: 86400000
     },
     // 激活状态:0-未激活；1-已激活
     status: {
@@ -89,8 +94,8 @@ module.exports = {
     // 是否管理员（默认为非管理员）
     isAdmin: {
       type: 'boolean',
-      unique: true
-        // defaultsTo: false
+      unique: true,
+      defaultsTo: false
     }
   },
 
@@ -119,6 +124,8 @@ module.exports = {
             return cb(err);
           }
           user.token_email = hash;
+          var _date = new Date();
+          user.verifyDate = _date;
           sails.controllers['auth/auth'].sendValidEmail(user.authname,
             user.email, user.token_email);
           cb();
