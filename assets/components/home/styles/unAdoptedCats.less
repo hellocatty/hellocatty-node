@@ -1,0 +1,112 @@
+// 待领养喵咪区域
+.hc_box_unadoptedcasts{
+  .cats_list{
+    .ulWithoutStyle();
+    margin-left: -10px;
+  }
+  .cats_item{
+    width: 234px;
+    overflow: hidden;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    .cat{
+      position: relative;
+    }
+    // 图片展示区域
+    .cat_thumb{
+      width: 234px;
+      height: 300px;
+      position: relative;
+      &:hover,&-hover{
+        .cover,.action_list{
+          display: block;
+        }
+      }
+    }
+    .cover{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      background-color: @fontColor;
+      .opacity(0.6);
+    }
+    .thumb{
+      width: 100%;
+      height: 100%;
+    }
+    .thumb_img{
+      width: 100%;
+      height: 100%;
+    }
+    .action_list{
+      .ulWithoutStyle();
+      position: absolute;
+      top: 50%;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 110px;
+      margin-top: -55px;
+      display: none;
+    }
+    .action_item{
+      width: 128px;
+      height: 40px;
+      margin: 0 auto;
+      color: @mainGrey;
+      border: dotted 1px @mainGrey;
+      box-sizing: border-box;
+      line-height: 38px;
+      font-size: 14px;
+      cursor: pointer;
+      .hc_icon_identy_white{
+        margin-top: -1px;
+      }
+      &_care{
+        margin-bottom: 30px;
+      }
+      &:hover,&-hover{
+        border-style: solid;
+        color: @fontColor;
+        background-color: @mainGrey;
+        .hc_icon_identy_white{
+          background-position: -17px -37px;
+        }
+        .hc_icon_like_white{
+          background-position: -17px -71px;
+        }
+      }
+    }
+    // 文字信息区域
+    .cat_info{
+      margin-top: 10px;
+    }
+    .info_title{
+      .stricktHeight(18px);
+      position: relative;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+    .location{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 14px;
+      .stricktHeight(14px);
+      .hc_icon_location{
+        margin-top: -4px;
+      }
+    }
+    .info_story{
+      font-size: 12px;
+      text-indent: 24px;
+      height: 40px;
+      line-height: 14px;
+      overflow: hidden;
+    }
+  }
+}

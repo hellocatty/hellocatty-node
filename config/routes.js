@@ -23,53 +23,45 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
-  '/': {
-    view: 'index'
-  },
-
+  // 首页
+  '/': 'Home/HomeController.render',
+  // about页
   '/about': {
     view: 'about'
   },
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+  /*---------------Login & Signup---------------*/
+  '/auth': 'Auth/AuthController.toAuth',
 
-  //---------------Login & Register
-    // 跳转到注册页面
-    'get /register': {
-      view: 'passport/register'
-    },
+  // 处理注册逻辑
+  'post /signup': 'Auth/AuthController.processRegister',
 
-    // 处理注册逻辑
-    'post /register': 'Auth/AuthController.processRegister',
+  // 处理登陆逻辑
+  'post /login': 'Auth/AuthController.processLogin',
 
-    // 跳转到登陆页
-    'get /login': {
-        view: 'passport/login'
-    },
+  // 登出逻辑
+  '/logout': 'Auth/AuthController.logout',
 
-    // 处理登陆逻辑
-    'post /login': 'Auth/AuthController.processLogin',
+  /*---------------Login & Signup---------------*/
 
-    // 登出逻辑
-    '/logout': 'Auth/AuthController.logout',
+  /*---------------用户中心---------------*/
+  'get /u/verify': 'Auth/AuthController.verifyEmail',
+  /*---------------用户中心---------------*/
+  /*---------------Users---------------*/
+  // 获取有领养需求的用户列表
+  'get /getPeople': 'User/UserController.searchByReq',
+  /*---------------Users---------------*/
 
-    // 浏览所有文章
-    '/article': 'Article/ArticleController.showAll'
+  /*---------------Cats---------------*/
+  'get /getCats': 'Cat/CatController.searchByReq',
+  /*---------------Cats---------------*/
 };

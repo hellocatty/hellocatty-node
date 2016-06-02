@@ -11,40 +11,42 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	create: function(req,res){
+	create: function(req, res) {
 		var _cat = req.allParams();
-		if(!_cat.name){
+		if (!_cat.name) {
 			return res.send({
-				err:{
-					code: 001,
+				err: {
+					code: '001',
 					msg: '缺少名称'
 				}
 			});
 		}
-		Cat.findOne({name: _cat.name},function(err,cat){
-			if(err){
+		Cat.findOne({
+			name: _cat.name
+		}, function(err, cat) {
+			if (err) {
 				return res.send({
-					code: 002,
+					code: '002',
 					msg: '数据库错误'
 				});
 			}
 
-			if(cat){
+			if (cat) {
 				return res.send({
-					code: 003,
+					code: '003',
 					msg: '同名猫咪已被注册'
 				});
 			}
 
-			Cat.create(_cat).exec(function(err, created){
-				if(err){
+			Cat.create(_cat).exec(function(err, created) {
+				if (err) {
 					return res.send({
-						code: 002,
+						code: '002',
 						msg: '数据库错误'
 					});
 				}
 				return res.send({
-					code: 100,
+					code: '100',
 					msg: '创建成功'
 				});
 			});
@@ -55,23 +57,47 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	delete: function(req,res){
+	delete: function(req, res) {
 
 	},
 	/**
-	 * 根据条件搜索猫咪
+	 * 根据请求搜索猫咪
 	 * @param req
 	 * @param res
 	 */
-	search: function(req,res){
+	searchByReq: function(req, res) {
 
+	},
+	/**
+	 * 根据提供的opt搜索猫咪，供服务端调用
+	 * @param opt
+	 */
+	searchByOpt: function(opt) {
+		// 默认搜索10个结果
+		var _num = opt.num || 10;
+		var _opt = opt && opt.info;
+		var _result = null;
+		if (!_opt) {
+			return null;
+		}
+
+		Cat.find({
+			where: _opt,
+			limit: _num
+		}).exec(function(err, cats) {
+			if (err) {
+				return;
+			}
+			_result = cats;
+		});
+		return _result;
 	},
 	/**
 	 * 更新猫咪身份信息
 	 * @param req
 	 * @param res
 	 */
-	updateIdentifyInfo: function(req,res){
+	updateIdentifyInfo: function(req, res) {
 
 	},
 	/**
@@ -79,7 +105,7 @@ module.exports = {
 	 * @param req
 	 * @param res
 	 */
-	updateAdoptInfo: function(req,res){
+	updateAdoptInfo: function(req, res) {
 
 	}
 

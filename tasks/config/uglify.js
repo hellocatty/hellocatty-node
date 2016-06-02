@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 		},
 		// 压缩各个自定义模块js
 		modules: {
-			files:[{
+			files: [{
 				expand: true,
 				cwd: '.tmp/public/js',
 				src: '**/*.js',
